@@ -2,13 +2,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class PathFinder {
+public abstract class Traverser {
     public ArrayList<Integer> pos;
     public StringBuffer path;
     public Direction direct;
 
     
-    public PathFinder (){
+    public Traverser(){
         this.path = new StringBuffer("");
         this.pos = new ArrayList<Integer>();
         this.direct = Direction.RIGHT;
@@ -31,7 +31,7 @@ public class PathFinder {
         return entry;
     }
 
-    public boolean checkIfExit (ArrayList<ArrayList<Character>> grid){
+    private boolean checkIfExit (ArrayList<ArrayList<Character>> grid){
         if (this.pos.get(1) == ((grid.get(0)).size() - 1)){
             if ((grid.get(this.pos.get(0)).get(this.pos.get(1))) == ' '){
                 return true;
@@ -41,7 +41,7 @@ public class PathFinder {
         return false;
     }
 
-    public void movePos(char character, ArrayList<ArrayList<Character>> grid){
+    private void movePos(char character, ArrayList<ArrayList<Character>> grid){
         if (character == 'F'){
             if ((this.direct == Direction.UP) && (grid.get(this.pos.get(0) + 1).get(this.pos.get(1)) != '#')){
                 int temp = this.pos.get(0);
@@ -82,4 +82,48 @@ public class PathFinder {
             }
         }
     }
+
+    private void addToPath (char character){
+        this.path.append(character);
+    }
+
+    public String getCanonicalPath(){
+        return this.path.toString();
+    }
+
+    public String getFactorizedPath(){
+        StringBuffer res = new StringBuffer("");
+        String worker = (getCanonicalPath()).replaceAll("\\s", "");
+        
+        int l = 0;
+        int r = 1;
+
+        while (r < worker.length()){
+            char left = worker.charAt(l);
+            char right = worker.charAt(r);
+            //first two conditionals catch the last char properly
+            if ((r == worker.length() - 1) && (left != right)){
+                if ((r - l) > 1) {
+                    res.append((r - l));
+                }
+                res.append(left);
+                res.append(" ");
+                res.append(right);
+            } else if ((r == worker.length() - 1) && (left == right)){
+                res.append(r - l + 1);
+                res.append(left);
+            } else if (right != left) {
+                if ((r - l) > 1) {
+                    res.append((r - l));
+                }
+                res.append(left);
+                res.append(" ");
+                l = r;
+            }
+            r++;
+        }
+        return res.toString();
+    }
+
+    abstract String searchAlgorithim(ArrayList<ArrayList<Character>> grid);
 }
