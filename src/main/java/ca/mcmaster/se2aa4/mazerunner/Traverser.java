@@ -31,7 +31,7 @@ public abstract class Traverser {
         return entry;
     }
 
-    private boolean checkIfExit (ArrayList<ArrayList<Character>> grid){
+    protected boolean checkIfExit (ArrayList<ArrayList<Character>> grid){
         if (this.pos.get(1) == ((grid.get(0)).size() - 1)){
             if ((grid.get(this.pos.get(0)).get(this.pos.get(1))) == ' '){
                 return true;
@@ -41,7 +41,7 @@ public abstract class Traverser {
         return false;
     }
 
-    private void movePos(char character, ArrayList<ArrayList<Character>> grid){
+    protected void movePos(char character, ArrayList<ArrayList<Character>> grid){
         if (character == 'F'){
             if ((this.direct == Direction.UP) && (grid.get(this.pos.get(0) + 1).get(this.pos.get(1)) != '#')){
                 int temp = this.pos.get(0);
@@ -83,7 +83,7 @@ public abstract class Traverser {
         }
     }
 
-    private void addToPath (char character){
+    protected void addToPath (char character){
         this.path.append(character);
     }
 
@@ -125,5 +125,5 @@ public abstract class Traverser {
         return res.toString();
     }
 
-    abstract String searchAlgorithim(ArrayList<ArrayList<Character>> grid);
+    abstract public void searchAlgorithim(ArrayList<ArrayList<Character>> grid, int height, int width);
 }
