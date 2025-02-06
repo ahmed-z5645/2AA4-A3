@@ -11,34 +11,67 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
-    
+    private static final void help() {
+        System.out.println("Welcome to the Maze Runner:");
+        System.out.println("Parameters: -i [path-to-maze.txt] [-p [PathToCheck]]");
+    }
+
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
 
         Options optionsobj = new Options();
         optionsobj.addOption("i", true, "Path to Maze");
-
+        optionsobj.addOption("p", true, "Path provided");
         CommandLineParser cmdlparser = new DefaultParser();
         
         try {
             CommandLine cmd = cmdlparser.parse(optionsobj, args);
 
-            if (cmd.hasOption("i")){
+            if (cmd.hasOption("i") && cmd.hasOption("p")){
+                System.out.println("here 3");
                 String pathToFile = args[1];
-                logger.info("**** Reading the maze from file " + pathToFile);
                 BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
                 String line;
+
+                Maze maze = new Maze();
+
                 while ((line = reader.readLine()) != null) {
-                    for (int idx = 0; idx < line.length(); idx++) {
-                        if (line.charAt(idx) == '#') {
-                            logger.trace("WALL ");
-                        } else if (line.charAt(idx) == ' ') {
-                            logger.trace("PASS ");
+                    maze.incrHeight();
+                    for (int i = 0; i < line.length(); i++){
+                        maze.fill(line.charAt(i), i);
+                    }
+                }
+                reader.close();
+
+                //then test path here
+                System.out.println("'" + maze.getChar(0, 0) + "'");
+            } else if (cmd.hasOption("i")){
+                String pathToFile = args[1];
+                BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
+                String line;
+                int size = 0;
+
+                Maze maze = new Maze();
+
+                while ((line = reader.readLine()) != null) {
+                    if (size < line.length()){
+                        size = line.length();
+                    };
+
+                    maze.incrHeight();
+                    for (int i = 0; i < size; i++){
+                        if ((size > line.length()) && (i >= line.length())){
+                            maze.fill(' ', i);
+                        } else {
+                            maze.fill(line.charAt(i), i);
                         }
                     }
-                    logger.trace(System.lineSeparator());
-            }
-            
+                }
+                reader.close();
+
+                //then use algorithm here
+            } else {
+                help();
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
