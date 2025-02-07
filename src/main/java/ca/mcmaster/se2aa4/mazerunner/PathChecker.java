@@ -6,6 +6,8 @@ public class PathChecker extends Traverser{
 
     public boolean checkPath(ArrayList<ArrayList<Character>> grid, String path){
         startAtEntry(grid);
+        path = path.replaceAll("\\s", "");
+        path = path.toUpperCase();
         for (int i = 0; i < path.length(); i++){
             char character = path.charAt(i);
             boolean status = movePos(character, grid);
