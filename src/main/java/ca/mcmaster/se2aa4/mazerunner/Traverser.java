@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class Traverser {
+public abstract class Traverser {
     public ArrayList<Integer> pos;
     public Direction direct;
 

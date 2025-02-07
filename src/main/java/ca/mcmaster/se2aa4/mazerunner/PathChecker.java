@@ -3,9 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.ArrayList;
 
 public class PathChecker extends Traverser{
-    public PathChecker(){
-        super();
-    }
 
     public boolean checkPath(ArrayList<ArrayList<Character>> grid, String path){
         startAtEntry(grid);

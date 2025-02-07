@@ -6,7 +6,6 @@ public abstract class PathFinder extends Traverser{
     public StringBuffer path;
 
     public PathFinder(){
-        super();
         this.path = new StringBuffer("");
     }
     
