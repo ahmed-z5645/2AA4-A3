@@ -10,10 +10,26 @@ public class PathChecker extends Traverser{
         path = path.toUpperCase();
         for (int i = 0; i < path.length(); i++){
             char character = path.charAt(i);
-            boolean status = movePos(character, grid);
-            if (status == false) {
-                return false;
-        }
+            if (Character.isDigit(character)){
+                if (i + 1 >= path.length()){
+                    return false;
+                } else if (path.charAt(i + 1) != 'L' && path.charAt(i + 1) != 'R' && path.charAt(i + 1) != 'F'){
+                    return false;
+                }
+
+                for (int j = 0; j < Character.getNumericValue(character); j++){
+                    boolean validMove = movePos(path.charAt(i + 1), grid);
+                    if (validMove == false) {
+                        return false;
+                    }
+                }
+                i++;
+            } else if (character == 'R' || character != 'L' || character != 'F'){
+                boolean validMove = movePos(character, grid);
+                if (validMove == false) {
+                    return false;
+            }
+            }
         }
         return checkIfExit(grid);
     }

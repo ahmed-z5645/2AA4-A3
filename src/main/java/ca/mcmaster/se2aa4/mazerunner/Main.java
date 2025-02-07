@@ -57,9 +57,9 @@ public class Main {
                 PathChecker pathChecker = new PathChecker();
 
                 if (pathChecker.checkPath(maze.getGrid(), inputPath)){
-                    System.out.println("The path is valid");
+                    System.out.println("This path is valid");
                 } else {
-                    System.out.println("The path is invalid");
+                    System.out.println("This path is invalid");
                 }
 
             } else if (cmd.hasOption("i")){
