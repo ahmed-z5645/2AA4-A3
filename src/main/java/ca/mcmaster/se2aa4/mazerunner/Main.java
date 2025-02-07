@@ -28,7 +28,6 @@ public class Main {
             CommandLine cmd = cmdlparser.parse(optionsobj, args);
 
             if (cmd.hasOption("i") && cmd.hasOption("p")){
-                System.out.println("here 3");
                 String pathToFile = args[1];
                 BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
                 String line;
@@ -70,6 +69,11 @@ public class Main {
                 reader.close();
 
                 //then use algorithm here
+                PathFinder rightHandSearch = new RightHandSearcher();
+                rightHandSearch.searchAlgorithim(maze.getGrid(), maze.getHeight(), maze.getWidth());
+                
+                System.out.println("The Canonical Path is: " + rightHandSearch.getCanonicalPath());
+                System.out.println("The Factorized Path is: " + rightHandSearch.getFactorizedPath());
             } else {
                 help();
             }

@@ -37,6 +37,18 @@ public class Maze {
         return res;
     }
 
+    public ArrayList<ArrayList<Character>> getGrid() {
+        return this.grid;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
     public void fill (Character input, int x) {
         incrWidth(x);
         if ((this.height) > this.grid.size()) {

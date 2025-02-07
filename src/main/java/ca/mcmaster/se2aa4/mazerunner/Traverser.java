@@ -12,15 +12,20 @@ public abstract class Traverser {
     }
 
     public ArrayList<Integer> startAtEntry(ArrayList<ArrayList<Character>> grid){
+        
         ArrayList<Integer> entry = new ArrayList<Integer>();
-        for (int i = 0; i < (grid.get(0)).size(); i++){
+        for (int i = 0; i < grid.size(); i++){
             ArrayList<Character> row = grid.get(i);
             if (row.get(0).equals(' ')){
-                
                 entry.add(i);
                 entry.add(0);
-                this.pos.set(0, i);
-                this.pos.set(1, 0);
+                if (this.pos.size() == 2){
+                    this.pos.set(0, i);
+                    this.pos.set(1, 0);
+                } else {
+                    this.pos.add(i);
+                    this.pos.add(0);
+                }
                 return entry;
             }
         }
@@ -53,8 +58,8 @@ public abstract class Traverser {
                 temp++;
                 this.pos.set(1, temp);
             } else if ((this.direct == Direction.DOWN) && 
-                        (this.pos.get(0) + 1 > grid.size()) &&
-                        (grid.get(this.pos.get(0) - 1).get(this.pos.get(1)) != '#')) {
+                        (this.pos.get(0) + 1 < grid.size()) &&
+                        (grid.get(this.pos.get(0) + 1).get(this.pos.get(1)) != '#')) {
                 int temp = this.pos.get(0);
                 temp++;
                 this.pos.set(0, temp);

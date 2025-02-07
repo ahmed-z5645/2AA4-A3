@@ -6,6 +6,7 @@ public abstract class PathFinder extends Traverser{
     public StringBuffer path;
 
     public PathFinder(){
+        super();
         this.path = new StringBuffer("");
     }
     
@@ -20,7 +21,7 @@ public abstract class PathFinder extends Traverser{
     public String getFactorizedPath(){
         StringBuffer res = new StringBuffer("");
         String worker = (getCanonicalPath()).replaceAll("\\s", "");
-        
+        //two pointers approach
         int l = 0;
         int r = 1;
 
