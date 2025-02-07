@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class RightHandSearcher extends Traverser {
+public class RightHandSearcher extends PathFinder {
 
     public void searchAlgorithim(ArrayList<ArrayList<Character>> grid, int height, int width){
         startAtEntry(grid);
