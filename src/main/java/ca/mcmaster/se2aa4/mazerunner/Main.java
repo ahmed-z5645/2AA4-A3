@@ -28,24 +28,42 @@ public class Main {
             CommandLine cmd = cmdlparser.parse(optionsobj, args);
 
             if (cmd.hasOption("i") && cmd.hasOption("p")){
-                String pathToFile = args[1];
+                String pathToFile = cmd.getOptionValue("i");
                 BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
                 String line;
+                int size = 0;
 
                 Maze maze = new Maze();
 
                 while ((line = reader.readLine()) != null) {
+                    if (size < line.length()){
+                        size = line.length();
+                    };
+
                     maze.incrHeight();
-                    for (int i = 0; i < line.length(); i++){
-                        maze.fill(line.charAt(i), i);
+                    for (int i = 0; i < size; i++){
+                        if ((size > line.length()) && (i >= line.length())){
+                            maze.fill(' ', i);
+                        } else {
+                            maze.fill(line.charAt(i), i);
+                        }
                     }
                 }
                 reader.close();
 
                 //then test path here
-                System.out.println("'" + maze.getChar(0, 0) + "'");
+                String inputPath = cmd.getOptionValue("p");
+
+                PathChecker pathChecker = new PathChecker();
+
+                if (pathChecker.checkPath(maze.getGrid(), inputPath)){
+                    System.out.println("The path is valid");
+                } else {
+                    System.out.println("The path is invalid");
+                }
+
             } else if (cmd.hasOption("i")){
-                String pathToFile = args[1];
+                String pathToFile = cmd.getOptionValue("i");
                 BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
                 String line;
                 int size = 0;
@@ -80,8 +98,5 @@ public class Main {
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("**** Computing path");
-        logger.error("PATH NOT COMPUTED");
-        logger.info("** End of MazeRunner");
     }
 }
