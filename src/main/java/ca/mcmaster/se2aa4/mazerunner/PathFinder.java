@@ -52,5 +52,5 @@ public abstract class PathFinder extends Traverser{
         return res.toString();
     }
 
-    abstract public void searchAlgorithim(ArrayList<ArrayList<Character>> grid, int height, int width);
+    abstract public void searchAlgorithm(ArrayList<ArrayList<Character>> grid, int height, int width);
 }

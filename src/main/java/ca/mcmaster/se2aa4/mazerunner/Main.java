@@ -88,7 +88,7 @@ public class Main {
 
                 //then use algorithm here
                 PathFinder rightHandSearch = new RightHandSearcher();
-                rightHandSearch.searchAlgorithim(maze.getGrid(), maze.getHeight(), maze.getWidth());
+                rightHandSearch.searchAlgorithm(maze.getGrid(), maze.getHeight(), maze.getWidth());
                 
                 System.out.println("The Canonical Path is: " + rightHandSearch.getCanonicalPath());
                 System.out.println("The Factorized Path is: " + rightHandSearch.getFactorizedPath());

@@ -6,7 +6,7 @@ public class RightHandSearcher extends PathFinder {
     public RightHandSearcher () {
         super();
     } 
-    public void searchAlgorithim(ArrayList<ArrayList<Character>> grid, int height, int width){
+    public void searchAlgorithm(ArrayList<ArrayList<Character>> grid, int height, int width){
         startAtEntry(grid);
 
         while (checkIfExit(grid) == false) {
