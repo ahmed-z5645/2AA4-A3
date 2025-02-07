@@ -46,7 +46,7 @@ public abstract class Traverser {
     protected boolean movePos(char character, ArrayList<ArrayList<Character>> grid){
         if (character == 'F'){
             if ((this.direct == Direction.UP) && 
-                ((this.pos.get(0)  - 1) > 0) && 
+                ((this.pos.get(0)  - 1) >= 0) && 
                 ((grid.get(this.pos.get(0) - 1).get(this.pos.get(1)) != '#'))) {
                 int temp = this.pos.get(0);
                 temp--;
@@ -64,7 +64,7 @@ public abstract class Traverser {
                 temp++;
                 this.pos.set(0, temp);
             } else if ((this.direct == Direction.LEFT) && 
-                        (this.pos.get(1) - 1 > 0) &&
+                        (this.pos.get(1) - 1 >= 0) &&
                         (grid.get(this.pos.get(0)).get(this.pos.get(1) - 1) != '#')) {
                 int temp = this.pos.get(1);
                 temp--;
