@@ -45,6 +45,8 @@ public class PathChecker extends Traverser{
                 if (validMove == false) {
                     break;
                 }
+            } else {
+                return false;
             }
         }
         
