@@ -4,6 +4,7 @@ import ca.mcmaster.se2aa4.mazerunner.Maze;
 import ca.mcmaster.se2aa4.mazerunner.PathChecker;
 import ca.mcmaster.se2aa4.mazerunner.PathFinder;
 import ca.mcmaster.se2aa4.mazerunner.RightHandSearcher;
+import ca.mcmaster.se2aa4.mazerunner.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

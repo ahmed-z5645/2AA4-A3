@@ -29,27 +29,9 @@ public class Main {
 
             if (cmd.hasOption("i") && cmd.hasOption("p")){
                 String pathToFile = cmd.getOptionValue("i");
-                BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
-                String line;
-                int size = 0;
-
-                Maze maze = new Maze();
-
-                while ((line = reader.readLine()) != null) {
-                    if (size < line.length()){
-                        size = line.length();
-                    };
-
-                    maze.incrHeight();
-                    for (int i = 0; i < size; i++){
-                        if ((size > line.length()) && (i >= line.length())){
-                            maze.fill(' ', i);
-                        } else {
-                            maze.fill(line.charAt(i), i);
-                        }
-                    }
-                }
-                reader.close();
+                
+                MazeFactory mazeFactory = new MazeFactory();
+                Maze maze = mazeFactory.createMazeFromFile(pathToFile);
 
                 //then test path here
                 String inputPath = cmd.getOptionValue("p");
@@ -66,28 +48,10 @@ public class Main {
 
             } else if (cmd.hasOption("i")){
                 String pathToFile = cmd.getOptionValue("i");
-                BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
-                String line;
-                int size = 0;
 
-                Maze maze = new Maze();
-
-                while ((line = reader.readLine()) != null) {
-                    if (size < line.length()){
-                        size = line.length();
-                    };
-
-                    maze.incrHeight();
-                    for (int i = 0; i < size; i++){
-                        if ((size > line.length()) && (i >= line.length())){
-                            maze.fill(' ', i);
-                        } else {
-                            maze.fill(line.charAt(i), i);
-                        }
-                    }
-                }
-                reader.close();
-
+                MazeFactory mazeFactory = new MazeFactory();
+                Maze maze = mazeFactory.createMazeFromFile(pathToFile);
+                
                 //then use algorithm here
                 PathFinder rightHandSearch = new RightHandSearcher();
                 SearchCommand searchCommand = new SearchCommand(rightHandSearch, maze);
