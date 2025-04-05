@@ -56,6 +56,8 @@ public class Main {
 
                 PathChecker pathChecker = new PathChecker();
 
+                CheckPathCommand checkPathCommand = new CheckPathCommand(pathChecker, maze);
+                checkPathCommand.execute(inputPath);
                 if (pathChecker.checkPath(maze.getGrid(), inputPath)){
                     System.out.println("This path is valid");
                 } else {
@@ -88,7 +90,8 @@ public class Main {
 
                 //then use algorithm here
                 PathFinder rightHandSearch = new RightHandSearcher();
-                rightHandSearch.searchAlgorithm(maze.getGrid(), maze.getHeight(), maze.getWidth());
+                SearchCommand searchCommand = new SearchCommand(rightHandSearch, maze);
+                searchCommand.execute();
                 
                 System.out.println("The Canonical Path is: " + rightHandSearch.getCanonicalPath());
                 System.out.println("The Factorized Path is: " + rightHandSearch.getFactorizedPath());
